@@ -1,0 +1,107 @@
+{
+  "name": "codex-balance-monitor",
+  "displayName": "Codex Balance Monitor",
+  "description": "在 Cursor/VSCode 中查看 Codex-For.Me 账户余量，并支持手动/自动刷新",
+  "version": "0.0.1",
+  "publisher": "henshao-local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:codexBalance.refreshBalance",
+    "onCommand:codexBalance.openPanel",
+    "onCommand:codexBalance.setAuthToken",
+    "onCommand:codexBalance.clearAuthToken",
+    "onCommand:codexBalance.openDashboard",
+    "onCommand:codexBalance.toggleCompactMode"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "codexBalance.refreshBalance",
+        "title": "Codex 余额: 立即刷新"
+      },
+      {
+        "command": "codexBalance.openPanel",
+        "title": "Codex 余额: 打开详情面板"
+      },
+      {
+        "command": "codexBalance.setAuthToken",
+        "title": "Codex 余额: 设置 Token"
+      },
+      {
+        "command": "codexBalance.clearAuthToken",
+        "title": "Codex 余额: 清除 Token"
+      },
+      {
+        "command": "codexBalance.openDashboard",
+        "title": "Codex 余额: 打开 Dashboard"
+      },
+      {
+        "command": "codexBalance.toggleCompactMode",
+        "title": "Codex 余额: 切换紧凑模式"
+      }
+    ],
+    "configuration": {
+      "title": "Codex Balance Monitor",
+      "properties": {
+        "codexBalance.apiBaseUrl": {
+          "type": "string",
+          "default": "https://codex-for.me/web/api/v1",
+          "description": "Codex-For.Me API 基础地址（默认已包含 /web/api/v1）。"
+        },
+        "codexBalance.dashboardUrl": {
+          "type": "string",
+          "default": "https://codex-for.me/dashboard.html",
+          "description": "Codex-For.Me Dashboard 页面地址。"
+        },
+        "codexBalance.autoRefreshSeconds": {
+          "type": "number",
+          "default": 60,
+          "minimum": 0,
+          "description": "自动刷新间隔（秒）。设为 0 表示关闭自动刷新。"
+        },
+        "codexBalance.requestTimeoutMs": {
+          "type": "number",
+          "default": 10000,
+          "minimum": 1000,
+          "description": "请求超时时间（毫秒）。"
+        },
+        "codexBalance.authToken": {
+          "type": "string",
+          "default": "",
+          "description": "可选：直接配置 authToken。推荐使用命令面板“Codex 余额: 设置 Token”写入安全存储。"
+        },
+        "codexBalance.compactMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "面板紧凑模式。开启后优先显示核心信息，布局更适合小屏幕。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package"
+  },
+  "keywords": [
+    "codex",
+    "balance",
+    "cursor",
+    "vscode"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.6.1",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^6.0.2"
+  }
+}
