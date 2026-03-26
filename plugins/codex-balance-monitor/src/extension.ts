@@ -197,7 +197,7 @@ class CodexBalanceExtension {
             await this.renderWebview();
 
             if (!options.silent) {
-                vscode.window.setStatusBarMessage(`Codex 余量已刷新：${formatCurrency(summary.card_balance)}`, 2500);
+                vscode.window.setStatusBarMessage(`Codex 今日已用已刷新：${formatCurrencyOrDash(summary.today_spent_amount)}`, 2500);
             }
         } catch (error) {
             const message = toErrorMessage(error);
@@ -309,15 +309,15 @@ class CodexBalanceExtension {
             const dailyBudget = formatCurrencyOrDash(this.lastSummary.card_daily_limit);
             const todaySpent = formatCurrencyOrDash(this.lastSummary.today_spent_amount);
 
-            this.statusBar.text = `$(credit-card) 余量 ${balance}`;
+            this.statusBar.text = `$(pulse) 今日已用 ${todaySpent}`;
             this.statusBar.command = 'codexBalance.refreshBalance';
             this.statusBar.tooltip = [
+                `今日已用: ${todaySpent}`,
                 `Codex 余量: ${balance}`,
                 `套餐: ${planName}`,
                 `注册时间: ${registeredAt}`,
                 `到期时间: ${expireAt}`,
                 `每日预算: ${dailyBudget}`,
-                `今日已用: ${todaySpent}`,
                 `更新时间: ${updateText}`,
                 '',
                 '点击可立即刷新'
