@@ -1,10 +1,10 @@
 # Codex Balance Monitor
 
-在 Cursor / VSCode 状态栏里直接查看 `codex-for.me` 余量，并支持一键刷新。
+在 Cursor / VSCode 状态栏里直接查看 `codex-for.me` 今日已用和余量，并支持一键刷新。
 
 ## 功能
 
-- 状态栏实时显示余额（`card_balance`）
+- 状态栏实时显示今日已用（`today_spent_amount`）
 - 支持命令面板手动刷新
 - 支持自动刷新（默认 60 秒）
 - 支持详情面板查看注册时间、到期时间、每日预算、今日已用、今日请求数、今日 Token、套餐信息
@@ -59,3 +59,32 @@ npm run package
 ```
 
 会在项目根目录生成 `.vsix` 文件，可在 Cursor / VSCode 中手动安装。
+
+## 发布到 VSCode 插件市场
+
+1. 在 VSCode Marketplace 创建 Publisher（ID 必须与 `package.json` 里的 `publisher` 一致）
+2. 生成 Marketplace 的 Personal Access Token（PAT）
+3. 本地首次登录并发布：
+
+```bash
+npx @vscode/vsce login pentoncos
+npm run publish:marketplace:patch
+```
+
+4. 后续可按版本级别发布：
+
+```bash
+npm run publish:marketplace:patch
+npm run publish:marketplace:minor
+npm run publish:marketplace:major
+```
+
+## GitHub 自动发布
+
+仓库已提供工作流：`.github/workflows/vscode-marketplace-publish.yml`
+
+- 触发方式：
+  - 手动触发 `workflow_dispatch`
+  - 推送 tag：`codex-balance-monitor-v*`
+- 必要密钥：
+  - `VSCE_PAT`（GitHub Repo Secrets）

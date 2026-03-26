@@ -3,7 +3,16 @@
   "displayName": "Codex Balance Monitor",
   "description": "在 Cursor/VSCode 中查看 Codex-For.Me 账户余量，并支持手动/自动刷新",
   "version": "0.0.1",
-  "publisher": "henshao-local",
+  "publisher": "pentoncos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PENTONCOS/chromeExtented.git",
+    "directory": "plugins/codex-balance-monitor"
+  },
+  "homepage": "https://github.com/PENTONCOS/chromeExtented/tree/main/plugins/codex-balance-monitor",
+  "bugs": {
+    "url": "https://github.com/PENTONCOS/chromeExtented/issues"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -89,7 +98,11 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "vscode:prepublish": "npm run compile",
-    "package": "vsce package"
+    "package": "vsce package",
+    "publish:marketplace": "vsce publish",
+    "publish:marketplace:patch": "vsce publish patch",
+    "publish:marketplace:minor": "vsce publish minor",
+    "publish:marketplace:major": "vsce publish major"
   },
   "keywords": [
     "codex",
